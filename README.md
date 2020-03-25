@@ -4,13 +4,13 @@
 ##### Centro Académico de Alajuela
 ##### Ingeniería en Computación
 ---------------------------------------
-Prof. Emmanuel Ramírez Segura
-Semestre I – 2020
-Valor: 12,50%
-Fecha de Asignación: 17/03/2020
-Fecha de Entrega: 14/04/2020
-Proyecto #1:
-Creación de un Analizador Léxico – Java Tropicalizado al Español
+###### Prof. Emmanuel Ramírez Segura
+###### Semestre I – 2020
+###### Valor: 12,50%
+###### Fecha de Asignación: 17/03/2020
+###### Fecha de Entrega: 14/04/2020
+###### Proyecto #1:
+###### Creación de un Analizador Léxico – Java Tropicalizado al Español
 
 
 * **Objetivo General**: Aplicar principios, modelos y técnicas para el diseño y la construcción de procesadores de lenguajes de programación de alto nivel, con énfasis en compiladores e intérpretes, para este proyecto, enfocándose en el diseño de un Analizador Léxico.
