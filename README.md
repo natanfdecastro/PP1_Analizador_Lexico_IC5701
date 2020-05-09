@@ -7,8 +7,8 @@
 ###### Prof. Emmanuel Ramírez Segura
 ###### Semestre I – 2020
 ###### Valor: 12,50%
-###### Fecha de Asignación: 17/03/2020
-###### Fecha de Entrega: 14/04/2020
+###### Fecha de Asignación: 12/05/2020
+###### Fecha de Entrega: 02/06/2020
 ###### Proyecto #1:
 ###### Creación de un Analizador Léxico – Java Tropicalizado al Español
 
