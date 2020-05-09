@@ -94,8 +94,24 @@ No hay entrega 0%
 
 * **Aspectos de entrega**
 
-1. La fecha de entrega de este proyecto es antes del Martes 14 de Abril a las 6:00pm (GMT-6).
-No se aceptarán proyectos posteriores a esa fecha-hora.
+1. La fecha de entrega de este proyecto será por etapas o avances:
+Para cada avance, se debe enviar el reporte con las secciones que ya fueron realizadas y
+apoyarse con evidencias de lo hecho, por ejemplo, para el Avance #2 las imágenes de salidas
+de su programa funcional deberán colocarse en el reporte.
+**Avance #1.** En esta fase se espera al menos observar la gramática ya traducida al español.
+Para esto, genere el reporte en PDF luego comprímalo en ZIP y luego envíelo por correo, con
+las secciones que se solicitan y que ya tenga listas.
+**Fecha de Entrega: Antes del 19/05/2020 – 11:59pm GMT-6**
+**Avance #2.** En esta fase se espera ver código funcional sobre algunas identificaciones de
+lexemas, envíe imágenes de su código, no envíe código aún.
+Para esto, genere el reporte en PDF luego comprímalo en ZIP y luego envíelo por correo, con
+las secciones que se solicitan y que ya tenga listas.
+**Fecha de Entrega: Antes del 26/05/2020 – 11:59pm GMT-6**
+**Avance #3.** Este avance, en realidad es la entrega final de proyecto, es decir, el documento
+de reporte final en PDF y los archivos de su programa.
+Para esto, genere el reporte en PDF luego comprímalo en ZIP y luego envíelo por correo, con
+las secciones que se solicitan y que ya tenga listas.
+**Fecha de Entrega: Antes del 02/06/2020 – 11:59pm GMT-6**
 2. Durante la segunda lección del Martes 31 de Marzo, el profesor habilitará un espacio para que
 los estudiantes le demuestren lo que llevan implementado a la fecha (esto constituye la revisión parcial), se espera observar:
     a. Código ejecutable que realice ciertos análisis léxicos parciales a archivos de entrada.
