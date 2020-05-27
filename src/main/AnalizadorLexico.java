@@ -13,14 +13,14 @@ public class AnalizadorLexico {
 
         String strarr = "";
 
-        System.out.println("Enter the Program: ");
+        System.out.println("Escriba el programa: ");
 
         for (int i = 0; i < input.length; i++){
             input[i] = s.nextLine();
             strarr += input[i];
         }
 
-        System.out.println("\n Input Line: ");
+        System.out.println("\n Linea de entrada: ");
 
         String output[] = strarr.split(" ");
 
@@ -36,20 +36,30 @@ public class AnalizadorLexico {
 
             if (null != output[i])
                 switch (output[i]) {
-                    case "String":
-                    case "int":
-                    case "float":
-                    case "double":
+                    case "Hilera":
+                    case "ent":
+                    case "flotante":
+                    case "doble":
+                    case "booleano":
                         tokenNo++;
-                        System.out.println("<keyword," + output[i] + ">");
+                        System.out.println("<palabraClave," + output[i] + ">");
                         break;
                     case "+":
                     case "-":
                     case "*":
                     case "%":
                     case "=":
+                    case "<":
+                    case ">":
+                    case "**":
+                    case "<<":
+                    case ">>":
+                    case "&&":
+                    case "||":
+                    case "<=":
+                    case ">=":
                         tokenNo++;
-                        System.out.println("<operator," + output[i] + ">");
+                        System.out.println("<operador," + output[i] + ">");
                         break;
                     case "20":
                     case "1":
@@ -66,23 +76,20 @@ public class AnalizadorLexico {
                     case "e":
                         tokenNo++;
                         id++;
-                        System.out.println("<id " + id + ", " + output[i] + " >");
+                        System.out.println("<iden " + id + ", " + output[i] + " >");
                         break;
                     case ",":
                         tokenNo++;
-                        System.out.println("<separator, " + output[i] + ">");
+                        System.out.println("<separador, " + output[i] + ">");
                         break;
                     case ";":
                         tokenNo++;
-                        System.out.println("<endofstatement, " + output[i] + ">");
+                        System.out.println("<finDeEnunciado, " + output[i] + ">");
                         break;
-                    default: System.out.println(output[i] + "input type unknown");
+                    default: System.out.println(output[i] + "tipo desconocido");
                     break;
-
                 }
-
         }
-        System.out.println("Total number of tokens: " + tokenNo);
+        System.out.println("Numero total de tokens: " + tokenNo);
     }
-
 }
