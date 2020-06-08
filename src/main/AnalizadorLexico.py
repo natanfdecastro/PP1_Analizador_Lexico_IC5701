@@ -14,23 +14,23 @@ class Escaner:
                                  r'|privado|protegido|publico|retornar|corto|estatico|estrictofp|super|cambiar' \
                                  r'|sincronizado|este|arroja|arrojan|transitorio|tratar|vacio|volatil|mientras|Hilera' \
                                  r'|imprimirln|imprimir '
-        self.tokenBooleano = r'verdad|falso'
-        self.tokenEntero = r'[0-9]+'
-        self.tokenIdentificador = r'[A-Za-z0-9_]+'
-        self.tokenOperador = r'-|\+|/|\*|\+|='
-        self.tokenOperadorLogico = r'==|>=|<=|>|<|&&'
-        self.tokenHilera = r'"[A-Za-z0-9]+"'
-        self.tokenSimboloEspecial = r',|;|\(|\)|{|}|\[|\]|\.'
-        self.tokenError = r'[\S]+'
+        self.token_booleano = r'verdad|falso'
+        self.token_entero = r'[0-9]+'
+        self.token_identificador = r'[A-Za-z0-9_]+'
+        self.token_operador = r'-|\+|/|\*|\+|='
+        self.token_operador_logico = r'==|>=|<=|>|<|&&'
+        self.token_hilera = r'"[A-Za-z0-9]+"'
+        self.token_simbolo_especial = r',|;|\(|\)|{|}|\[|\]|\.'
+        self.token_error = r'[\S]+'
 
         # Se crea un regex con todos los posibles tokens para formar la gramatica
-        self.gramatica = r'(' + self.token_palabra_clave + ')|(' + self.tokenBooleano + ')|(' \
-                         + self.tokenEntero + ')|(' + self.tokenIdentificador + ')|(' \
-                         + self.tokenOperador + ')|(' + self.tokenOperadorLogico + ')|(' \
-                         + self.tokenHilera + ')|(' + self.tokenSimboloEspecial + ')|(' + self.tokenError + ')'
+        self.gramatica = r'(' + self.token_palabra_clave + ')|(' + self.token_booleano + ')|(' \
+                         + self.token_entero + ')|(' + self.token_identificador + ')|(' \
+                         + self.token_operador + ')|(' + self.token_operador_logico + ')|(' \
+                         + self.token_hilera + ')|(' + self.token_simbolo_especial + ')|(' + self.token_error + ')'
 
-        self.tokensEncontrados = []
-        self.tokensErroneos = []
+        self.tokens_encontrados = []
+        self.tokens_erroneos = []
         self.error = False
 
         self.buscar_tokens()
@@ -45,21 +45,21 @@ class Escaner:
 
         for match in matches:
             if type(match.group(1)) == str:
-                self.tokensEncontrados += [["PALABRA_CLAVE", match.group(1)]]
+                self.tokens_encontrados += [["PALABRA_CLAVE", match.group(1)]]
             elif type(match.group(2)) == str:
-                self.tokensEncontrados += [["BOOLEANO", match.group(2)]]
+                self.tokens_encontrados += [["BOOLEANO", match.group(2)]]
             elif type(match.group(3)) == str:
-                self.tokensEncontrados += [["ENTERO", match.group(3)]]
+                self.tokens_encontrados += [["ENTERO", match.group(3)]]
             elif type(match.group(4)) == str:
-                self.tokensEncontrados += [["IDENTIFICADOR", match.group(4)]]
+                self.tokens_encontrados += [["IDENTIFICADOR", match.group(4)]]
             elif type(match.group(5)) == str:
-                self.tokensEncontrados += [["OPERADOR", match.group(5)]]
+                self.tokens_encontrados += [["OPERADOR", match.group(5)]]
             elif type(match.group(6)) == str:
-                self.tokensEncontrados += [["OPERADOR_LOGICO", match.group(6)]]
+                self.tokens_encontrados += [["OPERADOR_LOGICO", match.group(6)]]
             elif type(match.group(7)) == str:
-                self.tokensEncontrados += [["HILERA", match.group(7)]]
+                self.tokens_encontrados += [["HILERA", match.group(7)]]
             elif type(match.group(8)) == str:
-                self.tokensEncontrados += [["SIMBOLO_ESPECIAL", match.group(8)]]
+                self.tokens_encontrados += [["SIMBOLO_ESPECIAL", match.group(8)]]
             elif type(match.group(9)) == str:
                 print("ERROR: Token no reconocido" + match.group(9))
                 self.error = True
@@ -69,7 +69,7 @@ class Escaner:
         cuenta = 0
         print("Tokens encontrados: \n")
 
-        for token in self.tokensEncontrados:
+        for token in self.tokens_encontrados:
             print(str(cuenta) + " " + str(token))
             cuenta += 1
         print()
