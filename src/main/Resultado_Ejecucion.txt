@@ -1,0 +1,102 @@
+C:\Users\windows10\PycharmProjects\untitled\venv\Scripts\python.exe C:/Users/windows10/PycharmProjects/untitled/AnalizadorLexico.py
+clase Factorial {
+	publico estatico vacio principal(Hilera[] a) {
+
+		Sistema.afuera.imprimirln(nuevo Fac().ComputeFac(10));
+	}
+}
+clase Fac {
+	
+	publico ent ComputeFAC(ent num) {
+		ent num_aux;
+		si (num < 1)
+			num_aux = 1;
+		sino
+			numaux = num * (este.ComputeFac(num - 1));
+		retornar num_aux;
+	}
+
+}
+Tokens encontrados: 
+
+0 ['PALABRA_CLAVE', 'clase']
+1 ['IDENTIFICADOR', 'Factorial']
+2 ['SIMBOLO_ESPECIAL', '{']
+3 ['PALABRA_CLAVE', 'publico']
+4 ['PALABRA_CLAVE', 'estatico']
+5 ['PALABRA_CLAVE', 'vacio']
+6 ['IDENTIFICADOR', 'principal']
+7 ['SIMBOLO_ESPECIAL', '(']
+8 ['PALABRA_CLAVE', 'Hilera']
+9 ['SIMBOLO_ESPECIAL', '[']
+10 ['SIMBOLO_ESPECIAL', ']']
+11 ['IDENTIFICADOR', 'a']
+12 ['SIMBOLO_ESPECIAL', ')']
+13 ['SIMBOLO_ESPECIAL', '{']
+14 ['IDENTIFICADOR', 'Sistema']
+15 ['SIMBOLO_ESPECIAL', '.']
+16 ['IDENTIFICADOR', 'afuera']
+17 ['SIMBOLO_ESPECIAL', '.']
+18 ['PALABRA_CLAVE', 'imprimirln']
+19 ['SIMBOLO_ESPECIAL', '(']
+20 ['PALABRA_CLAVE', 'nuevo']
+21 ['IDENTIFICADOR', 'Fac']
+22 ['SIMBOLO_ESPECIAL', '(']
+23 ['SIMBOLO_ESPECIAL', ')']
+24 ['SIMBOLO_ESPECIAL', '.']
+25 ['IDENTIFICADOR', 'ComputeFac']
+26 ['SIMBOLO_ESPECIAL', '(']
+27 ['ENTERO', '10']
+28 ['SIMBOLO_ESPECIAL', ')']
+29 ['SIMBOLO_ESPECIAL', ')']
+30 ['SIMBOLO_ESPECIAL', ';']
+31 ['SIMBOLO_ESPECIAL', '}']
+32 ['SIMBOLO_ESPECIAL', '}']
+33 ['PALABRA_CLAVE', 'clase']
+34 ['IDENTIFICADOR', 'Fac']
+35 ['SIMBOLO_ESPECIAL', '{']
+36 ['PALABRA_CLAVE', 'publico']
+37 ['PALABRA_CLAVE', 'ent']
+38 ['IDENTIFICADOR', 'ComputeFAC']
+39 ['SIMBOLO_ESPECIAL', '(']
+40 ['PALABRA_CLAVE', 'ent']
+41 ['IDENTIFICADOR', 'num']
+42 ['SIMBOLO_ESPECIAL', ')']
+43 ['SIMBOLO_ESPECIAL', '{']
+44 ['PALABRA_CLAVE', 'ent']
+45 ['IDENTIFICADOR', 'num_aux']
+46 ['SIMBOLO_ESPECIAL', ';']
+47 ['PALABRA_CLAVE', 'si']
+48 ['SIMBOLO_ESPECIAL', '(']
+49 ['IDENTIFICADOR', 'num']
+50 ['OPERADOR_LOGICO', '<']
+51 ['ENTERO', '1']
+52 ['SIMBOLO_ESPECIAL', ')']
+53 ['IDENTIFICADOR', 'num_aux']
+54 ['OPERADOR', '=']
+55 ['ENTERO', '1']
+56 ['SIMBOLO_ESPECIAL', ';']
+57 ['PALABRA_CLAVE', 'sino']
+58 ['IDENTIFICADOR', 'numaux']
+59 ['OPERADOR', '=']
+60 ['IDENTIFICADOR', 'num']
+61 ['OPERADOR', '*']
+62 ['SIMBOLO_ESPECIAL', '(']
+63 ['PALABRA_CLAVE', 'este']
+64 ['SIMBOLO_ESPECIAL', '.']
+65 ['IDENTIFICADOR', 'ComputeFac']
+66 ['SIMBOLO_ESPECIAL', '(']
+67 ['IDENTIFICADOR', 'num']
+68 ['OPERADOR', '-']
+69 ['ENTERO', '1']
+70 ['SIMBOLO_ESPECIAL', ')']
+71 ['SIMBOLO_ESPECIAL', ')']
+72 ['SIMBOLO_ESPECIAL', ';']
+73 ['PALABRA_CLAVE', 'retornar']
+74 ['IDENTIFICADOR', 'num_aux']
+75 ['SIMBOLO_ESPECIAL', ';']
+76 ['SIMBOLO_ESPECIAL', '}']
+77 ['SIMBOLO_ESPECIAL', '}']
+
+
+Process finished with exit code 0

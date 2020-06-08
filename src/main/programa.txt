@@ -1,0 +1,18 @@
+clase Factorial {
+	publico estatico vacio principal(Hilera[] a) {
+
+		Sistema.afuera.imprimirln(nuevo Fac().ComputeFac(10));
+	}
+}
+clase Fac {
+	
+	publico ent ComputeFAC(ent num) {
+		ent num_aux;
+		si (num < 1)
+			num_aux = 1;
+		sino
+			numaux = num * (este.ComputeFac(num - 1));
+		retornar num_aux;
+	}
+
+}
