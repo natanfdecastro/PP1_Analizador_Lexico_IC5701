@@ -1,13 +1,20 @@
 import re  # Importa la biblioteca que maneja regex de Python
 
-
 class Escaner:
 
     def __init__(self, programa):
 
+        '''
+        Descripcion: Función inicial de la clase.
+        Entradas: Una instancia de la clase, un string con el código de Java Tropicalizado al Español.
+        Salidas: Ninguna.
+        Restricciones: String de entrada no debe de ser nulo.
+        '''
+
         # Contiene el programa leido del programa.txt
         self.programa = programa
 
+        # Contiene los identificadores de las palabras clave del Java Tropicalizado al Español.
         self.token_palabra_clave = r'abstracto|asertar|booleano|romper|byte|caso|atrapar|caracter|clase|continuar' \
                                  r'|predeterminado|hacer|doble|sino|enum|extender|final|finalmente|flotante|para|si' \
                                  r'|implementa|importar|instanciable|ent|interfaz|largo|nativo|nuevo|nulo|paquete' \
@@ -38,11 +45,21 @@ class Escaner:
 
     def buscar_tokens(self):
 
+        '''
+        Descripcion: Busca e identifica los tokens del código entrante.
+        Entradas: Una instancia de la clase.
+        Salidas: Ninguna.
+        Restricciones: Ninguna.
+        '''
+
+        # Imprime el programa ingresado.
         print(self.programa)
-        self.gramatica = re.compile(self.gramatica)  # Prepara la gramatica para hacer match
+        # Prepara la gramatica para hacer match
+        self.gramatica = re.compile(self.gramatica)
 
         matches = self.gramatica.finditer(self.programa)
 
+        # Recorre los matches encontrados para asignarles su respectivo tipo.
         for match in matches:
             if type(match.group(1)) == str:
                 self.tokens_encontrados += [["PALABRA_CLAVE", match.group(1)]]
@@ -65,6 +82,13 @@ class Escaner:
                 self.error = True
 
     def mostrar_Tokens(self):
+
+        '''
+        Descripcion: Muestra los tokens con su respectivo tipo previamente identificado.
+        Entradas: Una instancia de la clase.
+        Salidas: Ninguna.
+        Restricciones: Ninguna.
+        '''
 
         cuenta = 0
         print("Tokens encontrados: \n")
