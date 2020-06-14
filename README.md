@@ -1,4 +1,6 @@
-# pp-analizador-lexico-ic-5701
+# pp-compilador-ic-5701
+
+## Fase Analizador Léxico
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
@@ -27,7 +29,9 @@ $ python3 Main.py [nombre_del_archivo]
    - A la hora de utilizar PyCharm Jetbrains 2020 1.2 para programar debemos buscar la opción de terminal, esta es facilitada por el mismo idle.
    - Ésta terminal estará en el directorio del proyecto principal, debemos dirigirnos hacia el src del proyecto donde se encuentra el main y correrlo. No es necesario poner el python3 al inicio del comando.
    - El link de descarga de PyCharm es https://www.jetbrains.com/es-es/pycharm/
-   
+
+## Fase Analizador Sintáctico
+
 # Integrantes
 
   - Emanuelle Jiménez Sancho
