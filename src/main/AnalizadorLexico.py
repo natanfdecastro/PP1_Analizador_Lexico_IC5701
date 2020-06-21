@@ -15,11 +15,11 @@ class Escaner:
         self.programa = programa
 
         # Contiene los identificadores de las palabras clave del Java Tropicalizado al Español.
-        self.token_palabra_clave = r'abstracto|asertar|booleano|romper|byte|caso|atrapar|caracter|clase|continuar' \
-                                 r'|predeterminado|hacer|doble|sino|enum|extender|final|finalmente|flotante|para|si' \
-                                 r'|implementa|importar|instanciable|ent|interfaz|largo|nativo|nuevo|nulo|paquete' \
-                                 r'|privado|protegido|publico|retornar|corto|estatico|estrictofp|super|cambiar' \
-                                 r'|sincronizado|este|arroja|arrojan|transitorio|tratar|vacio|volatil|mientras|Hilera' \
+        self.token_palabra_clave = r' booleano|caracter|clase|este|vacio|estatico|Sistema' \
+                                 r'|sino|extiende|si|salida' \
+                                 r'|ent|nuevo' \
+                                 r'|publico|retornar' \
+                                 r'|mientras|Hilera' \
                                  r'|imprimirln|imprimir '
         self.token_booleano = r'verdad|falso'
         self.token_entero = r'[0-9]+'
