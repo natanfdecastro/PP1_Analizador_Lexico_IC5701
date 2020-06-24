@@ -27,14 +27,26 @@ class Escaner:
         self.token_operador = r'-|\+|/|\*|\+|='
         self.token_operador_logico = r'==|>=|<=|>|<|&&'
         self.token_hilera = r'"[A-Za-z0-9]+"'
-        self.token_simbolo_especial = r',|;|\(|\)|{|}|\[|\]|\.'
+        self.token_coma = r','
+        self.token_punto_y_coma = r';'
+        self.token_Lparentesis = r'\('
+        self.token_Rparentesis = r'\)'
+        self.token_Lcorchete = r'{'
+        self.token_Rcorchete = r'}'
+        self.token_Lcuadrado = r'\['
+        self.token_Rcuadrado = r'\]'
+        self.token_punto = r'\.'
         self.token_error = r'[\S]+'
 
         # Se crea un regex con todos los posibles tokens para formar la gramatica
         self.gramatica = r'(' + self.token_palabra_clave + ')|(' + self.token_booleano + ')|(' \
                          + self.token_entero + ')|(' + self.token_identificador + ')|(' \
                          + self.token_operador + ')|(' + self.token_operador_logico + ')|(' \
-                         + self.token_hilera + ')|(' + self.token_simbolo_especial + ')|(' + self.token_error + ')'
+                         + self.token_hilera + ')|(' + self.token_coma + ')|(' + self.token_punto_y_coma + ')|(' \
+                         + self.token_Lparentesis + ')|(' + self.token_Rparentesis + ')|(' \
+                         + self.token_Rcuadrado + ')|(' + self.token_Lcuadrado + ')|(' \
+                         + self.token_Lcorchete + ')|(' + self.token_Rcorchete + ')|(' \
+                         + self.token_punto + ')|(' + self.token_error + ')'
 
         self.tokens_encontrados = []
         self.tokens_erroneos = []
@@ -76,9 +88,25 @@ class Escaner:
             elif type(match.group(7)) == str:
                 self.tokens_encontrados += [["HILERA", match.group(7)]]
             elif type(match.group(8)) == str:
-                self.tokens_encontrados += [["SIMBOLO_ESPECIAL", match.group(8)]]
+                self.tokens_encontrados += [["COMA", match.group(8)]]
             elif type(match.group(9)) == str:
-                print("ERROR: Token no reconocido" + match.group(9))
+                self.tokens_encontrados += [["PUNTO_Y_COMA", match.group(9)]]
+            elif type(match.group(10)) == str:
+                self.tokens_encontrados += [["L_PARENTESIS", match.group(10)]]
+            elif type(match.group(11)) == str:
+                self.tokens_encontrados += [["R_PARENTESIS", match.group(11)]]
+            elif type(match.group(12)) == str:
+                self.tokens_encontrados += [["R_CUADRADO", match.group(12)]]
+            elif type(match.group(13)) == str:
+                self.tokens_encontrados += [["L_CUADRADO", match.group(13)]]
+            elif type(match.group(14)) == str:
+                self.tokens_encontrados += [["L_CORCHETE", match.group(14)]]
+            elif type(match.group(15)) == str:
+                self.tokens_encontrados += [["R_CORCHETE", match.group(15)]]
+            elif type(match.group(16)) == str:
+                self.tokens_encontrados += [["PUNTO", match.group(16)]]
+            elif type(match.group(17)) == str:
+                print("ERROR: Token no reconocido" + match.group(17))
                 self.error = True
 
     def mostrar_Tokens(self):
