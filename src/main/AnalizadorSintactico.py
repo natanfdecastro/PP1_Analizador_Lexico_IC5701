@@ -87,3 +87,16 @@ class AnalizadorSintactico():
                                                             puntero_token += 1
         self.calcular_error(puntero_token)
         return [], -1
+
+    def parsear_RestricFormal(self, puntero_token):
+
+        if (self.comparar("COMA", puntero_token)):
+            puntero_token += 1
+            if (self.comparar("TIPO", puntero_token)):
+                puntero_token += 1
+                arbol_aux, nuevo_puntero = self.parsear_tipo(puntero_token)
+                if (self.comparar("IDEN", puntero_token)):
+                    puntero_token += 1
+
+        self.calcular_error(puntero_token)
+        return [], -1
