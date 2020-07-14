@@ -30,73 +30,96 @@ class AnalizadorSintactico():
                 self.generar_error()
 
 
-    def parsear_DeclMetodo(self, puntero_token):
+    # Método para parsear una declaración de método.
+    # indice_actual_tokens_encontrados hace referencia a la posicion actual de la hilera de tokens.
+    def parsear_DeclMetodo(self, indice_actual_tokens_encontrados):
 
-        if(self.comparar("PUBLICO", puntero_token)):
-            subarbol.agregar_nodo(self.crear_nodo(puntero_token))
-            puntero_token += 1
-            if (self.comparar("TIPO", puntero_token)):
-                puntero_token += 1
-                arbol_aux, nuevo_puntero = self.parsear_tipo(puntero_token)
-                if (self.comparar("IDEN", puntero_token)):
-                    puntero_token += 1
-                    if (self.comparar("PAREN_IZQUIERDO", puntero_token)):
-                        puntero_token += 1
-                        if (self.comparar("LISTA_FORMAL", puntero_token)):
-                            puntero_token += 1
-                            arbol_aux, nuevo_puntero = self.parsear_lista_formal(puntero_token)
-                            if (self.comparar("PAREN_DERECHO", puntero_token)):
-                                puntero_token += 1
-                                if (self.comparar("CORCHETE_IZQUIERDO", puntero_token)):
-                                    puntero_token += 1
+        # Hace una condicion para verificar que el primer token encontrado sea el de "publico".
+        if(self.comparar("PUBLICO", indice_actual_tokens_encontrados)):
+            subarbol_sintaxis_abstracta.agregar_nodo(self.crear_nodo(indice_actual_tokens_encontrados))
+            indice_actual_tokens_encontrados += 1
+            # Hace una condicion para verificar que el siguiente token encontrado sea el de "tipo".
+            if (self.comparar("TIPO", indice_actual_tokens_encontrados)):
+                indice_actual_tokens_encontrados += 1
+                subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_tipo(indice_actual_tokens_encontrados)
+                # Hace una condicion para verificar que el siguiente token encontrado sea el de "iden".
+                if (self.comparar("IDEN", indice_actual_tokens_encontrados)):
+                    indice_actual_tokens_encontrados += 1
+                    # Hace una condicion para verificar que el siguiente token encontrado sea el de "(".
+                    if (self.comparar("L_PARENTESIS", indice_actual_tokens_encontrados)):
+                        indice_actual_tokens_encontrados += 1
+                        # Hace una condicion para verificar que el siguiente token encontrado sea el de "listaFormal".
+                        if (self.comparar("LISTA_FORMAL", indice_actual_tokens_encontrados)):
+                            indice_actual_tokens_encontrados += 1
+                            subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_lista_formal(indice_actual_tokens_encontrados)
+                            # Hace una condicion para verificar que el siguiente token encontrado sea el de ")".
+                            if (self.comparar("R_PARENTESIS", indice_actual_tokens_encontrados)):
+                                indice_actual_tokens_encontrados += 1
+                                # Hace una condicion para verificar que el siguiente token encontrado sea el de "{".
+                                if (self.comparar("L_CORCHETE", indice_actual_tokens_encontrados)):
+                                    indice_actual_tokens_encontrados += 1
 
-                                    subarbol_aux, nuevo_puntero = self.parsear_accion(puntero_token)
-                                    if (self.validar_parseo(subarbol_aux)):
-                                        subarbol.agregar_nodo(subarbol_aux)
-                                        puntero_token = nuevo_puntero
+                                    subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_decl_var(indice_actual_tokens_encontrados)
+                                    # Hace una condicion para verificar que el siguiente token encontrado sea el de "DeclVar".
+                                    if (self.comparar_tokens(subarbol_sintaxis_abstracta_temp)):
+                                        subarbol_sintaxis_abstracta.agregar_nodo(subarbol_sintaxis_abstracta_temp)
+                                        indice_actual_tokens_encontrados = nuevo_puntero
 
+                                        # Hace un ciclo ya que puede haber más de una DeclVar.
                                         while (True):
-                                            subarbol_aux, nuevo_puntero = self.parsear_decl_var(puntero_token)
-                                            if (self.validar_parseo(subarbol_aux)):
-                                                subarbol.agregar_nodo(subarbol_aux)
-                                                puntero_token = nuevo_puntero
+                                            subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_decl_var(indice_actual_tokens_encontrados)
+                                            if (self.comparar_tokens(subarbol_sintaxis_abstracta_temp)):
+                                                subarbol_sintaxis_abstracta.agregar_nodo(subarbol_sintaxis_abstracta_temp)
+                                                indice_actual_tokens_encontrados = nuevo_puntero
                                             else:
                                                 break
 
-                                        subarbol_aux, nuevo_puntero = self.parsear_accion(puntero_token)
-                                        if (self.validar_parseo(subarbol_aux)):
-                                            subarbol.agregar_nodo(subarbol_aux)
-                                            puntero_token = nuevo_puntero
+                                        subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_accion(indice_actual_tokens_encontrados)
+                                        # Hace una condicion para verificar que el siguiente token encontrado sea el de "Declaracion".
+                                        if (self.comparar_tokens(subarbol_sintaxis_abstracta_temp)):
+                                            subarbol_sintaxis_abstracta.agregar_nodo(subarbol_sintaxis_abstracta_temp)
+                                            indice_actual_tokens_encontrados = nuevo_puntero
 
+                                            # Hace un ciclo ya que puede haber más de una Declaración.
                                             while (True):
-                                                subarbol_aux, nuevo_puntero = self.parsear_declaracion(puntero_token)
-                                                if (self.validar_parseo(subarbol_aux)):
-                                                    subarbol.agregar_nodo(subarbol_aux)
-                                                    puntero_token = nuevo_puntero
+                                                subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_declaracion(indice_actual_tokens_encontrados)
+                                                if (self.comparar_tokens(subarbol_sintaxis_abstracta_temp)):
+                                                    subarbol_sintaxis_abstracta.agregar_nodo(subarbol_sintaxis_abstracta_temp)
+                                                    indice_actual_tokens_encontrados = nuevo_puntero
                                                 else:
                                                     break
-
-                                            if (self.comparar("RETORNAR", puntero_token)):
-                                                puntero_token += 1
-                                                if (self.comparar("EXPREN", puntero_token)):
-                                                    puntero_token += 1
-                                                    arbol_aux, nuevo_puntero = self.parsear_expren(puntero_token)
-                                                    if (self.comparar("PUNTO_Y_COMA", puntero_token)):
-                                                        puntero_token += 1
-                                                        if (self.comparar("CORCHETE_DERECHO", puntero_token)):
-                                                            puntero_token += 1
-        self.calcular_error(puntero_token)
+                                            # Hace una condicion para verificar que el siguiente token encontrado sea el de "retornar".
+                                            if (self.comparar("RETORNAR", indice_actual_tokens_encontrados)):
+                                                indice_actual_tokens_encontrados += 1
+                                                # Hace una condicion para verificar que el siguiente token encontrado sea el de "expren".
+                                                if (self.comparar("EXPREN", indice_actual_tokens_encontrados)):
+                                                    indice_actual_tokens_encontrados += 1
+                                                    subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_expren(indice_actual_tokens_encontrados)
+                                                    # Hace una condicion para verificar que el siguiente token encontrado sea el de ";".
+                                                    if (self.comparar("PUNTO_Y_COMA", indice_actual_tokens_encontrados)):
+                                                        indice_actual_tokens_encontrados += 1
+                                                        # Hace una condicion para verificar que el siguiente token encontrado sea el de "}".
+                                                        if (self.comparar("CORCHETE_DERECHO", indice_actual_tokens_encontrados)):
+                                                            indice_actual_tokens_encontrados += 1
+        # En caso de que no identifique algún token, devolvería error.
+        self.calcular_error(indice_actual_tokens_encontrados)
         return [], -1
 
-    def parsear_RestricFormal(self, puntero_token):
+    # Método para parsear una declaración de método.
+    # indice_actual_tokens_encontrados hace referencia a la posicion actual de la hilera de tokens.
+    def parsear_RestricFormal(self, indice_actual_tokens_encontrados):
 
-        if (self.comparar("COMA", puntero_token)):
-            puntero_token += 1
-            if (self.comparar("TIPO", puntero_token)):
-                puntero_token += 1
-                arbol_aux, nuevo_puntero = self.parsear_tipo(puntero_token)
-                if (self.comparar("IDEN", puntero_token)):
-                    puntero_token += 1
+        # Hace una condicion para verificar que el siguiente token encontrado sea el de ",".
+        if (self.comparar("COMA", indice_actual_tokens_encontrados)):
+            indice_actual_tokens_encontrados += 1
+            # Hace una condicion para verificar que el siguiente token encontrado sea el de "Tipo".
+            if (self.comparar("TIPO", indice_actual_tokens_encontrados)):
+                indice_actual_tokens_encontrados += 1
+                subarbol_sintaxis_abstracta_temp, nuevo_puntero = self.parsear_tipo(indice_actual_tokens_encontrados)
+                # Hace una condicion para verificar que el siguiente token encontrado sea el de "iden".
+                if (self.comparar("IDEN", indice_actual_tokens_encontrados)):
+                    indice_actual_tokens_encontrados += 1
 
-        self.calcular_error(puntero_token)
+        # En caso de que no identifique algún token, devolvería error.
+        self.calcular_error(indice_actual_tokens_encontrados)
         return [], -1
