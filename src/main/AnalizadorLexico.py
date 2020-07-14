@@ -1,4 +1,4 @@
-import re  # Importa la biblioteca que maneja regex de Python
+import re  # Biblioteca que maneja regex de Python
 
 class Escaner:
 
