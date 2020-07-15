@@ -14,13 +14,13 @@ class NodoAST:
     hijos_nodo_ast = [] # El subarbol asociado al nodo terminal o no terminal
 
     # Constructor
-    def __init__(self, numero_tipo, valor, hijos):
+    def __init__(self, tipo_nodo_ast, valor_nodo_ast, hijos_nodo_ast):
  
-        self.numero_tipo = numero_tipo
+        self.tipo_nodo_ast = tipo_nodo_ast
  
-        self.valor_nodo_ast = valor
+        self.valor_nodo_ast = valor_nodo_ast
  
-        self.hijos = hijos
+        self.hijos_nodo_ast = hijos_nodo_ast
 
     # Insertar hijos en el nodo
     def agregar_nodo(self, nuevo_nodo_hijo):
@@ -35,8 +35,51 @@ class Nodo_Raiz:
         NodoAST.__init__(self, tipo_nodo_ast, valor_nodo_ast, hijos)
 
     # Determinar correctitud y jerarquia de sintaxis en el AST
-    def verificar_correctitud(self, checker):
+    # mediante el patrón de diseño Visitor
+    def verificar_correctitud(self, verificador):
  
-        return checker.visitarPrograma(self)
+        return verificador.visitar_nodo_raiz(self)
 
-class Nodo_DeclVar
+class Nodo_DeclVar(Nodo):
+
+	# Constructor
+	def init(self, tipo_nodo_ast, valor_nodo_ast, hijos_nodo_ast):
+		
+		NodoAST.__init__(self, tipo_nodo_ast, valor_nodo_ast, hijos_nodo_ast)
+	
+	# Determinar correctitud y jerarquia de sintaxis en el AST
+	# mediante el patrón de diseño Visitor
+	def verificar_correctitud(self, verificador):
+
+		return verificador.visitar_nodo_declvar(self)
+
+class Nodo_Si(Nodo):
+
+	# Constructor
+	def init(self, tipo_nodo_ast, valor_nodo_ast, hijos_nodo_ast):
+		
+		NodoAST.__init__(self, tipo_nodo_ast, valor_nodo_ast, hijos_nodo_ast)
+	
+	# Determinar correctitud y jerarquia de sintaxis en el AST
+	# mediante el patrón de diseño Visitor
+	def verificar_correctitud(self, verificador):
+
+		return verificador.visitar_nodo_si(self)
+
+class Nodo_Sino(Nodo):
+
+	# Constructor
+	def init(self, tipo_nodo_ast, valor_nodo_ast, hijos_nodo_ast):
+		
+		NodoAST.__init__(self, tipo_nodo_ast, valor_nodo_ast, hijos_nodo_ast)
+	
+	# Determinar correctitud y jerarquia de sintaxis en el AST
+	# mediante el patrón de diseño Visitor
+	def verificar_correctitud(self, verificador):
+
+		return verificador.visitar_nodo_sino(self)
+
+
+
+
+
