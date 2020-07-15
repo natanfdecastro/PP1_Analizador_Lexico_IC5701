@@ -1,3 +1,6 @@
+import os
+import re  # Importa la biblioteca que maneja regex de Python
+
 import ply.lex as lex
 import ply.yacc as yacc
 import sys
@@ -19,6 +22,7 @@ tokens = [
     'L_CORCHETE',
     'R_CORCHETE',
     'PUNTO',
+    'ESPACIO',
 ]
 
 def t_PALABRA_CLAVE(t):
@@ -101,11 +105,26 @@ def t_PUNTO(t):
     t.type = 'PUNTO'
     return t
 
+def t_ESPACIO_VACIO(t):
+    r'\ '
+    t.type ='ESPACIO'
+    return t
+
 def t_error(t):
     print("Error en el léxico")
     t.lexer.skip(1)
 
 lexer = lex.lex()
+
+while True:
+    a = input()
+    print(a)
+    lexer.input(a)
+    tok = lexer.token()
+    if not tok:
+        break
+    print(tok)
+
 
 def p_inicial(p):
    '''
@@ -127,14 +146,14 @@ def p_claseprincipal(p):
 
 def p_declclase(p):
     '''
-    declclase : PALABRACLAVE IDENTIFICADOR declclaseprima
+    declclase : PALABRA_CLAVE IDENTIFICADOR declclaseprima
     '''
     p[0] = (p[1] ,p[2], p[3])
 
 def p_declclaseprima(p):
     '''
     declclaseprima : L_CORCHETE declavar declmetodo R_CORCHETE
-                   | PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declametodo R_CORCHETE
+                   | PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE
     '''
     p[0] = p[1]
 
@@ -164,10 +183,10 @@ def p_restricformal(p):
 
 def p_tipo(p):
     '''
-    tipo : ent L_CUADRADO R_CUADRADO
-        | booleano
-        | ent
-        | iden
+    tipo : ENTERO L_CUADRADO R_CUADRADO
+        | BOOLEANO
+        | ENTERO
+        | IDENTIFICADOR
     '''
     p[0] = p[1]
 
@@ -185,12 +204,10 @@ def p_declaracion(p):
 def p_expren(p):
     '''
     expren : ENTERO exprenprima
-            | PALABRA_CLAVE exprenprima
-            | PALABRA_CLAVE exprenprima
             | IDENTIFICADOR exprenprima
             | PALABRA_CLAVE exprenprima
             | PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-            | PALABRA_CLAVE iden L_PARENTESIS R_PARENTESIS exprenprima
+            | PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
             | expren exprenprima
             | L_PARENTESIS expren R_PARENTESIS exprenprima
     '''
@@ -198,26 +215,29 @@ def p_expren(p):
 
 def p_exprenprima(p):
     '''
-    exprenprima :  OPERADOR expren exprenprima
-                | [expren] exprenprima
-                | PUNTO PALABRACLAVE expreprima
-                | PUNTO IDENTIFICADOR L_PARENTESIS listaexp R_PARENTESIS exprenprima
+    exprenprima :  OPERADOR expren
+                | L_CUADRADO expren R_CUADRADO
+                | PUNTO PALABRA_CLAVE
+                | PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
     '''
-    p[0] = p[1],p[2]
-
-def p_restricexp(p):
-    '''
-    restricexp : COMA expren
-    '''
-    p[0] = p[1] , p [2]
-
-def p_empty(p):
-    '''
-    empty :
-    '''
-    p[0] = None
+    p[0] = p[1], p[2]
 
 parser = yacc.yacc()
+# Obtiene el path actual donde se encuentra el Main.py, este directorio lo separa y lo mete en una lista
+path = os.getcwd().split("\\")
+
+# Este va ser el nuevo path para buscar las pruebas
+new_path = ""
+
+# Insertar todos los paths menos el último, exceptuando la carpeta main
+for i in range(len(path)-1):
+    new_path += path[i] + '/'
+
+# Concatena la carpeta resources al path nuevo, esto para que apunte a una nueva carpeta
+new_path += "resources/"
+
+# Editar la ruta según computadora que se ejecuta
+archivo = open(new_path + sys.argv[1],'r')
 
 while True:
     try:

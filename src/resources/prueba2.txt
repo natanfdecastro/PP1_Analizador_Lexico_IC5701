@@ -1,23 +1,16 @@
 clase CribaEratostenes {
-
     publico statico vacio principal(Hilera[] a){
-
         ent n = 120;
-
         ent[] numeros = nuevo ent[n-1];$
-
         para(ent i=0; i<n-1; i++){
             numeros[i] = 0;
         }
-
         ent raiz_n = (ent)Math.piso(Math.pow(n,0.5));
-
         para(ent i = 2; i <= raiz_n; i++){
             para(ent j = i; j <= (ent)(n/i); j++ ){
                 numeros[i*j - 2] = 1;
             }
         }
-
         para(ent i=0; i<n-1; i++){
             si( numeros[i]==0 ){
                 Sistema.afuera.imprimirln(i+2);

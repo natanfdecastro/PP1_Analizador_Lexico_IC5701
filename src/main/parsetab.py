@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BOOLEANO COMA ENTERO HILERA IDENTIFICADOR L_CORCHETE L_CUADRADO L_PARENTESIS OPERADOR OPERADOR_LOGICO PALABRA_CLAVE PUNTO PUNTO_Y_COMA R_CORCHETE R_CUADRADO R_PARENTESIS\n   inicial : programa\n   \n   programa : claseprincipal declclase\n   \n   claseprincipal : IDENTIFICADOR\n   \n    declclase : PALABRA_CLAVE\n    \n    empty :\n    '
+_lr_signature = 'BOOLEANO COMA ENTERO ESPACIO HILERA IDENTIFICADOR L_CORCHETE L_CUADRADO L_PARENTESIS OPERADOR OPERADOR_LOGICO PALABRA_CLAVE PUNTO PUNTO_Y_COMA R_CORCHETE R_CUADRADO R_PARENTESIS\n   inicial : programa\n   \n   programa : claseprincipal declclase\n   \n   claseprincipal : PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE\n   \n    declclase : PALABRA_CLAVE IDENTIFICADOR declclaseprima\n    \n    declclaseprima : L_CORCHETE declavar declmetodo R_CORCHETE\n                   | PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE\n    \n    declavar : tipo IDENTIFICADOR PUNTO_Y_COMA\n    \n    declmetodo : PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE\n    \n    listaformal : tipo IDENTIFICADOR restricformal\n    \n    restricformal : COMA tipo IDENTIFICADOR\n    \n    tipo : ENTERO L_CUADRADO R_CUADRADO\n        | BOOLEANO\n        | ENTERO\n        | IDENTIFICADOR\n    \n    declaracion : L_CORCHETE declaracion R_CORCHETE\n                | PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion\n                | PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion\n                | PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA\n                | IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA\n                | IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren\n    \n    expren : ENTERO exprenprima\n            | IDENTIFICADOR exprenprima\n            | PALABRA_CLAVE exprenprima\n            | PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima\n            | PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima\n            | expren exprenprima\n            | L_PARENTESIS expren R_PARENTESIS exprenprima\n    \n    exprenprima :  OPERADOR expren\n                | L_CUADRADO expren R_CUADRADO\n                | PUNTO PALABRA_CLAVE\n                | PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS\n    '
     
-_lr_action_items = {'IDENTIFICADOR':([0,],[4,]),'$end':([1,2,5,6,],[0,-1,-2,-4,]),'PALABRA_CLAVE':([3,4,],[6,-3,]),}
+_lr_action_items = {'PALABRA_CLAVE':([0,3,4,8,13,15,20,26,27,30,32,38,50,55,56,58,59,60,62,64,65,71,75,76,78,79,81,82,83,84,85,88,89,92,93,96,97,98,101,104,105,106,108,110,111,112,],[4,6,7,10,20,23,26,32,23,-7,35,41,53,53,62,64,64,64,64,74,64,-15,-23,64,64,93,53,-26,-21,-22,-19,-3,64,-28,-30,105,-18,64,-29,-27,53,-20,-25,-16,-24,-31,]),'$end':([1,2,5,11,28,36,],[0,-1,-2,-4,-5,-6,]),'IDENTIFICADOR':([6,7,10,12,16,17,18,19,21,23,29,30,31,37,39,46,47,48,49,50,55,58,59,60,62,64,65,76,78,79,81,89,98,103,105,],[8,9,14,17,24,-14,-13,-12,17,17,34,-7,-11,17,42,17,17,51,52,54,54,68,68,68,68,77,68,68,68,94,54,68,68,109,54,]),'L_CORCHETE':([8,9,14,30,43,50,55,57,81,105,],[12,13,21,-7,47,55,55,63,55,55,]),'ENTERO':([12,21,23,37,46,47,58,59,60,62,65,76,78,89,98,],[18,18,18,18,18,18,67,67,67,67,67,67,67,67,67,]),'BOOLEANO':([12,21,23,37,46,47,],[19,19,19,19,19,19,]),'L_CUADRADO':([18,41,54,64,66,67,68,69,70,72,74,75,80,82,83,84,90,92,93,95,100,101,102,104,106,107,108,111,112,],[25,44,60,76,76,76,76,76,76,76,89,-23,76,-26,-21,-22,76,76,-30,76,76,-29,76,-27,76,76,-25,-24,-31,]),'R_CORCHETE':([22,33,61,63,71,73,75,82,83,84,85,87,92,93,96,97,99,101,104,106,108,110,111,112,],[28,36,71,73,-15,88,-23,-26,-21,-22,-19,99,-28,-30,-17,-18,-8,-29,-27,-20,-25,-16,-24,-31,]),'PUNTO_Y_COMA':([24,69,72,75,81,82,83,84,92,93,101,104,108,111,112,],[30,85,87,-23,97,-26,-21,-22,-28,-30,-29,-27,-25,-24,-31,]),'R_CUADRADO':([25,44,70,75,82,83,84,90,92,93,100,101,104,108,111,112,],[31,48,86,-23,-26,-21,-22,101,-28,-30,107,-29,-27,-25,-24,-31,]),'L_PARENTESIS':([34,35,53,58,59,60,62,65,76,77,78,89,94,98,],[37,38,58,65,65,65,65,65,65,91,65,65,103,65,]),'R_PARENTESIS':([40,45,51,52,66,75,80,82,83,84,91,92,93,101,104,108,109,111,112,],[43,-9,57,-10,81,-23,95,-26,-21,-22,102,-28,-30,-29,-27,-25,112,-24,-31,]),'COMA':([42,],[46,]),'OPERADOR':([54,64,66,67,68,69,70,72,75,80,82,83,84,86,90,92,93,95,100,101,102,104,106,107,108,111,112,],[59,78,78,78,78,78,78,78,-23,78,-26,-21,-22,98,78,78,-30,78,78,-29,78,-27,78,78,-25,-24,-31,]),'PUNTO':([64,66,67,68,69,70,72,75,80,82,83,84,90,92,93,95,100,101,102,104,106,107,108,111,112,],[79,79,79,79,79,79,79,-23,79,-26,-21,-22,79,79,-30,79,79,-29,79,-27,79,79,-25,-24,-31,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'inicial':([0,],[1,]),'programa':([0,],[2,]),'claseprincipal':([0,],[3,]),'declclase':([3,],[5,]),}
+_lr_goto_items = {'inicial':([0,],[1,]),'programa':([0,],[2,]),'claseprincipal':([0,],[3,]),'declclase':([3,],[5,]),'declclaseprima':([8,],[11,]),'declavar':([12,21,47,],[15,27,50,]),'tipo':([12,21,23,37,46,47,],[16,16,29,39,49,16,]),'declmetodo':([15,27,],[22,33,]),'listaformal':([37,],[40,]),'restricformal':([42,],[45,]),'declaracion':([50,55,81,105,],[56,61,96,110,]),'expren':([58,59,60,62,65,76,78,89,98,],[66,69,70,72,80,90,92,100,106,]),'exprenprima':([64,66,67,68,69,70,72,80,90,92,95,100,102,106,107,],[75,82,83,84,82,82,82,82,82,82,104,82,108,82,111,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,9 +27,35 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> inicial","S'",1,None,None,None),
-  ('inicial -> programa','inicial',1,'p_inicial','plyExample.py',112),
-  ('programa -> claseprincipal declclase','programa',2,'p_programa','plyExample.py',118),
-  ('claseprincipal -> IDENTIFICADOR','claseprincipal',1,'p_claseprincipal','plyExample.py',124),
-  ('declclase -> PALABRA_CLAVE','declclase',1,'p_declclase','plyExample.py',130),
-  ('empty -> <empty>','empty',0,'p_empty','plyExample.py',136),
+  ('inicial -> programa','inicial',1,'p_inicial','plyExample.py',123),
+  ('programa -> claseprincipal declclase','programa',2,'p_programa','plyExample.py',129),
+  ('claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE','claseprincipal',17,'p_claseprincipal','plyExample.py',135),
+  ('declclase -> PALABRA_CLAVE IDENTIFICADOR declclaseprima','declclase',3,'p_declclase','plyExample.py',141),
+  ('declclaseprima -> L_CORCHETE declavar declmetodo R_CORCHETE','declclaseprima',4,'p_declclaseprima','plyExample.py',147),
+  ('declclaseprima -> PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE','declclaseprima',6,'p_declclaseprima','plyExample.py',148),
+  ('declavar -> tipo IDENTIFICADOR PUNTO_Y_COMA','declavar',3,'p_declavar','plyExample.py',154),
+  ('declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE','declmetodo',13,'p_declmetodo','plyExample.py',160),
+  ('listaformal -> tipo IDENTIFICADOR restricformal','listaformal',3,'p_listaformal','plyExample.py',166),
+  ('restricformal -> COMA tipo IDENTIFICADOR','restricformal',3,'p_restricformal','plyExample.py',172),
+  ('tipo -> ENTERO L_CUADRADO R_CUADRADO','tipo',3,'p_tipo','plyExample.py',178),
+  ('tipo -> BOOLEANO','tipo',1,'p_tipo','plyExample.py',179),
+  ('tipo -> ENTERO','tipo',1,'p_tipo','plyExample.py',180),
+  ('tipo -> IDENTIFICADOR','tipo',1,'p_tipo','plyExample.py',181),
+  ('declaracion -> L_CORCHETE declaracion R_CORCHETE','declaracion',3,'p_declaracion','plyExample.py',187),
+  ('declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion','declaracion',7,'p_declaracion','plyExample.py',188),
+  ('declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion','declaracion',5,'p_declaracion','plyExample.py',189),
+  ('declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA','declaracion',5,'p_declaracion','plyExample.py',190),
+  ('declaracion -> IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA','declaracion',4,'p_declaracion','plyExample.py',191),
+  ('declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren','declaracion',6,'p_declaracion','plyExample.py',192),
+  ('expren -> ENTERO exprenprima','expren',2,'p_expren','plyExample.py',198),
+  ('expren -> IDENTIFICADOR exprenprima','expren',2,'p_expren','plyExample.py',199),
+  ('expren -> PALABRA_CLAVE exprenprima','expren',2,'p_expren','plyExample.py',200),
+  ('expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima','expren',6,'p_expren','plyExample.py',201),
+  ('expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima','expren',5,'p_expren','plyExample.py',202),
+  ('expren -> expren exprenprima','expren',2,'p_expren','plyExample.py',203),
+  ('expren -> L_PARENTESIS expren R_PARENTESIS exprenprima','expren',4,'p_expren','plyExample.py',204),
+  ('exprenprima -> OPERADOR expren','exprenprima',2,'p_exprenprima','plyExample.py',210),
+  ('exprenprima -> L_CUADRADO expren R_CUADRADO','exprenprima',3,'p_exprenprima','plyExample.py',211),
+  ('exprenprima -> PUNTO PALABRA_CLAVE','exprenprima',2,'p_exprenprima','plyExample.py',212),
+  ('exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS','exprenprima',5,'p_exprenprima','plyExample.py',213),
 ]
