@@ -8,8 +8,8 @@ Unused terminals:
 
 Grammar
 
-Rule 0     S' -> inicial
-Rule 1     inicial -> programa
+Rule 0     S' -> restricformal
+Rule 1     restricformal -> COMA tipo IDENTIFICADOR
 Rule 2     programa -> claseprincipal declclase
 Rule 3     claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
 Rule 4     declclase -> PALABRA_CLAVE IDENTIFICADOR declclaseprima
@@ -18,17 +18,17 @@ Rule 6     declclaseprima -> PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar dec
 Rule 7     declavar -> tipo IDENTIFICADOR PUNTO_Y_COMA
 Rule 8     declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
 Rule 9     listaformal -> tipo IDENTIFICADOR restricformal
-Rule 10    restricformal -> COMA tipo IDENTIFICADOR
-Rule 11    tipo -> ENTERO L_CUADRADO R_CUADRADO
-Rule 12    tipo -> BOOLEANO
-Rule 13    tipo -> ENTERO
-Rule 14    tipo -> IDENTIFICADOR
-Rule 15    declaracion -> L_CORCHETE declaracion R_CORCHETE
-Rule 16    declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-Rule 17    declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
-Rule 18    declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
-Rule 19    declaracion -> IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
-Rule 20    declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
+Rule 10    tipo -> ENTERO L_CUADRADO R_CUADRADO
+Rule 11    tipo -> BOOLEANO
+Rule 12    tipo -> ENTERO
+Rule 13    tipo -> IDENTIFICADOR
+Rule 14    declaracion -> L_CORCHETE declaracion R_CORCHETE
+Rule 15    declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
+Rule 16    declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
+Rule 17    declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
+Rule 18    declaracion -> IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
+Rule 19    declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
+Rule 20    declaracion -> <empty>
 Rule 21    expren -> ENTERO exprenprima
 Rule 22    expren -> IDENTIFICADOR exprenprima
 Rule 23    expren -> PALABRA_CLAVE exprenprima
@@ -36,1281 +36,129 @@ Rule 24    expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO ex
 Rule 25    expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
 Rule 26    expren -> expren exprenprima
 Rule 27    expren -> L_PARENTESIS expren R_PARENTESIS exprenprima
-Rule 28    exprenprima -> OPERADOR expren
-Rule 29    exprenprima -> L_CUADRADO expren R_CUADRADO
-Rule 30    exprenprima -> PUNTO PALABRA_CLAVE
-Rule 31    exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
+Rule 28    expren -> <empty>
+Rule 29    exprenprima -> OPERADOR expren
+Rule 30    exprenprima -> L_CUADRADO expren R_CUADRADO
+Rule 31    exprenprima -> PUNTO PALABRA_CLAVE
+Rule 32    exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
+Rule 33    exprenprima -> <empty>
+Rule 34    empty -> <empty>
 
 Terminals, with rules where they appear
 
-BOOLEANO             : 12
-COMA                 : 10
-ENTERO               : 11 13 21
+BOOLEANO             : 11
+COMA                 : 1
+ENTERO               : 10 12 21
 ESPACIO              : 
 HILERA               : 
-IDENTIFICADOR        : 3 3 4 6 7 8 9 10 14 19 20 22 25 31 31
-L_CORCHETE           : 3 3 5 6 8 15
-L_CUADRADO           : 3 11 20 24 29
-L_PARENTESIS         : 3 8 16 17 18 25 27 31
-OPERADOR             : 19 20 28
+IDENTIFICADOR        : 1 3 3 4 6 7 8 9 13 18 19 22 25 32 32
+L_CORCHETE           : 3 3 5 6 8 14
+L_CUADRADO           : 3 10 19 24 30
+L_PARENTESIS         : 3 8 15 16 17 25 27 32
+OPERADOR             : 18 19 29
 OPERADOR_LOGICO      : 
-PALABRA_CLAVE        : 3 3 3 3 3 3 3 4 6 8 8 16 16 17 18 23 24 24 25 30
-PUNTO                : 30 31
-PUNTO_Y_COMA         : 7 8 18 19
-R_CORCHETE           : 3 3 5 6 8 15
-R_CUADRADO           : 3 11 20 24 29
-R_PARENTESIS         : 3 8 16 17 18 25 27 31
+PALABRA_CLAVE        : 3 3 3 3 3 3 3 4 6 8 8 15 15 16 17 23 24 24 25 31
+PUNTO                : 31 32
+PUNTO_Y_COMA         : 7 8 17 18
+R_CORCHETE           : 3 3 5 6 8 14
+R_CUADRADO           : 3 10 19 24 30
+R_PARENTESIS         : 3 8 15 16 17 25 27 32
 error                : 
 
 Nonterminals, with rules where they appear
 
 claseprincipal       : 2
-declaracion          : 8 15 16 16 17
+declaracion          : 8 14 15 15 16
 declavar             : 5 6 8
 declclase            : 2
 declclaseprima       : 4
 declmetodo           : 5 6
-expren               : 8 16 17 18 19 20 20 24 26 27 28 29
+empty                : 
+expren               : 8 15 16 17 18 19 19 24 26 27 29 30
 exprenprima          : 21 22 23 24 25 26 27
-inicial              : 0
 listaformal          : 8
-programa             : 1
-restricformal        : 9
-tipo                 : 7 8 9 10
+programa             : 
+restricformal        : 9 0
+tipo                 : 1 7 8 9
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . inicial
-    (1) inicial -> . programa
-    (2) programa -> . claseprincipal declclase
-    (3) claseprincipal -> . PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
+    (0) S' -> . restricformal
+    (1) restricformal -> . COMA tipo IDENTIFICADOR
 
-    PALABRA_CLAVE   shift and go to state 4
+    COMA            shift and go to state 2
 
-    inicial                        shift and go to state 1
-    programa                       shift and go to state 2
-    claseprincipal                 shift and go to state 3
+    restricformal                  shift and go to state 1
 
 state 1
 
-    (0) S' -> inicial .
+    (0) S' -> restricformal .
 
 
 
 state 2
 
-    (1) inicial -> programa .
+    (1) restricformal -> COMA . tipo IDENTIFICADOR
+    (10) tipo -> . ENTERO L_CUADRADO R_CUADRADO
+    (11) tipo -> . BOOLEANO
+    (12) tipo -> . ENTERO
+    (13) tipo -> . IDENTIFICADOR
 
-    $end            reduce using rule 1 (inicial -> programa .)
+    ENTERO          shift and go to state 5
+    BOOLEANO        shift and go to state 6
+    IDENTIFICADOR   shift and go to state 4
 
+    tipo                           shift and go to state 3
 
 state 3
 
-    (2) programa -> claseprincipal . declclase
-    (4) declclase -> . PALABRA_CLAVE IDENTIFICADOR declclaseprima
+    (1) restricformal -> COMA tipo . IDENTIFICADOR
 
-    PALABRA_CLAVE   shift and go to state 6
+    IDENTIFICADOR   shift and go to state 7
 
-    declclase                      shift and go to state 5
 
 state 4
 
-    (3) claseprincipal -> PALABRA_CLAVE . PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
+    (13) tipo -> IDENTIFICADOR .
 
-    PALABRA_CLAVE   shift and go to state 7
+    IDENTIFICADOR   reduce using rule 13 (tipo -> IDENTIFICADOR .)
 
 
 state 5
 
-    (2) programa -> claseprincipal declclase .
+    (10) tipo -> ENTERO . L_CUADRADO R_CUADRADO
+    (12) tipo -> ENTERO .
 
-    $end            reduce using rule 2 (programa -> claseprincipal declclase .)
+    L_CUADRADO      shift and go to state 8
+    IDENTIFICADOR   reduce using rule 12 (tipo -> ENTERO .)
 
 
 state 6
 
-    (4) declclase -> PALABRA_CLAVE . IDENTIFICADOR declclaseprima
+    (11) tipo -> BOOLEANO .
 
-    IDENTIFICADOR   shift and go to state 8
+    IDENTIFICADOR   reduce using rule 11 (tipo -> BOOLEANO .)
 
 
 state 7
 
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE . IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
+    (1) restricformal -> COMA tipo IDENTIFICADOR .
 
-    IDENTIFICADOR   shift and go to state 9
+    $end            reduce using rule 1 (restricformal -> COMA tipo IDENTIFICADOR .)
 
 
 state 8
 
-    (4) declclase -> PALABRA_CLAVE IDENTIFICADOR . declclaseprima
-    (5) declclaseprima -> . L_CORCHETE declavar declmetodo R_CORCHETE
-    (6) declclaseprima -> . PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE
+    (10) tipo -> ENTERO L_CUADRADO . R_CUADRADO
 
-    L_CORCHETE      shift and go to state 12
-    PALABRA_CLAVE   shift and go to state 10
+    R_CUADRADO      shift and go to state 9
 
-    declclaseprima                 shift and go to state 11
 
 state 9
 
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR . L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
+    (10) tipo -> ENTERO L_CUADRADO R_CUADRADO .
 
-    L_CORCHETE      shift and go to state 13
+    IDENTIFICADOR   reduce using rule 10 (tipo -> ENTERO L_CUADRADO R_CUADRADO .)
 
-
-state 10
-
-    (6) declclaseprima -> PALABRA_CLAVE . IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE
-
-    IDENTIFICADOR   shift and go to state 14
-
-
-state 11
-
-    (4) declclase -> PALABRA_CLAVE IDENTIFICADOR declclaseprima .
-
-    $end            reduce using rule 4 (declclase -> PALABRA_CLAVE IDENTIFICADOR declclaseprima .)
-
-
-state 12
-
-    (5) declclaseprima -> L_CORCHETE . declavar declmetodo R_CORCHETE
-    (7) declavar -> . tipo IDENTIFICADOR PUNTO_Y_COMA
-    (11) tipo -> . ENTERO L_CUADRADO R_CUADRADO
-    (12) tipo -> . BOOLEANO
-    (13) tipo -> . ENTERO
-    (14) tipo -> . IDENTIFICADOR
-
-    ENTERO          shift and go to state 18
-    BOOLEANO        shift and go to state 19
-    IDENTIFICADOR   shift and go to state 17
-
-    declavar                       shift and go to state 15
-    tipo                           shift and go to state 16
-
-state 13
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE . PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 20
-
-
-state 14
-
-    (6) declclaseprima -> PALABRA_CLAVE IDENTIFICADOR . L_CORCHETE declavar declmetodo R_CORCHETE
-
-    L_CORCHETE      shift and go to state 21
-
-
-state 15
-
-    (5) declclaseprima -> L_CORCHETE declavar . declmetodo R_CORCHETE
-    (8) declmetodo -> . PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 23
-
-    declmetodo                     shift and go to state 22
-
-state 16
-
-    (7) declavar -> tipo . IDENTIFICADOR PUNTO_Y_COMA
-
-    IDENTIFICADOR   shift and go to state 24
-
-
-state 17
-
-    (14) tipo -> IDENTIFICADOR .
-
-    IDENTIFICADOR   reduce using rule 14 (tipo -> IDENTIFICADOR .)
-
-
-state 18
-
-    (11) tipo -> ENTERO . L_CUADRADO R_CUADRADO
-    (13) tipo -> ENTERO .
-
-    L_CUADRADO      shift and go to state 25
-    IDENTIFICADOR   reduce using rule 13 (tipo -> ENTERO .)
-
-
-state 19
-
-    (12) tipo -> BOOLEANO .
-
-    IDENTIFICADOR   reduce using rule 12 (tipo -> BOOLEANO .)
-
-
-state 20
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE . PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 26
-
-
-state 21
-
-    (6) declclaseprima -> PALABRA_CLAVE IDENTIFICADOR L_CORCHETE . declavar declmetodo R_CORCHETE
-    (7) declavar -> . tipo IDENTIFICADOR PUNTO_Y_COMA
-    (11) tipo -> . ENTERO L_CUADRADO R_CUADRADO
-    (12) tipo -> . BOOLEANO
-    (13) tipo -> . ENTERO
-    (14) tipo -> . IDENTIFICADOR
-
-    ENTERO          shift and go to state 18
-    BOOLEANO        shift and go to state 19
-    IDENTIFICADOR   shift and go to state 17
-
-    declavar                       shift and go to state 27
-    tipo                           shift and go to state 16
-
-state 22
-
-    (5) declclaseprima -> L_CORCHETE declavar declmetodo . R_CORCHETE
-
-    R_CORCHETE      shift and go to state 28
-
-
-state 23
-
-    (8) declmetodo -> PALABRA_CLAVE . tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-    (11) tipo -> . ENTERO L_CUADRADO R_CUADRADO
-    (12) tipo -> . BOOLEANO
-    (13) tipo -> . ENTERO
-    (14) tipo -> . IDENTIFICADOR
-
-    ENTERO          shift and go to state 18
-    BOOLEANO        shift and go to state 19
-    IDENTIFICADOR   shift and go to state 17
-
-    tipo                           shift and go to state 29
-
-state 24
-
-    (7) declavar -> tipo IDENTIFICADOR . PUNTO_Y_COMA
-
-    PUNTO_Y_COMA    shift and go to state 30
-
-
-state 25
-
-    (11) tipo -> ENTERO L_CUADRADO . R_CUADRADO
-
-    R_CUADRADO      shift and go to state 31
-
-
-state 26
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE . PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 32
-
-
-state 27
-
-    (6) declclaseprima -> PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar . declmetodo R_CORCHETE
-    (8) declmetodo -> . PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 23
-
-    declmetodo                     shift and go to state 33
-
-state 28
-
-    (5) declclaseprima -> L_CORCHETE declavar declmetodo R_CORCHETE .
-
-    $end            reduce using rule 5 (declclaseprima -> L_CORCHETE declavar declmetodo R_CORCHETE .)
-
-
-state 29
-
-    (8) declmetodo -> PALABRA_CLAVE tipo . IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-
-    IDENTIFICADOR   shift and go to state 34
-
-
-state 30
-
-    (7) declavar -> tipo IDENTIFICADOR PUNTO_Y_COMA .
-
-    PALABRA_CLAVE   reduce using rule 7 (declavar -> tipo IDENTIFICADOR PUNTO_Y_COMA .)
-    L_CORCHETE      reduce using rule 7 (declavar -> tipo IDENTIFICADOR PUNTO_Y_COMA .)
-    IDENTIFICADOR   reduce using rule 7 (declavar -> tipo IDENTIFICADOR PUNTO_Y_COMA .)
-
-
-state 31
-
-    (11) tipo -> ENTERO L_CUADRADO R_CUADRADO .
-
-    IDENTIFICADOR   reduce using rule 11 (tipo -> ENTERO L_CUADRADO R_CUADRADO .)
-
-
-state 32
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE . PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 35
-
-
-state 33
-
-    (6) declclaseprima -> PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo . R_CORCHETE
-
-    R_CORCHETE      shift and go to state 36
-
-
-state 34
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR . L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-
-    L_PARENTESIS    shift and go to state 37
-
-
-state 35
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE . L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    L_PARENTESIS    shift and go to state 38
-
-
-state 36
-
-    (6) declclaseprima -> PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE .
-
-    $end            reduce using rule 6 (declclaseprima -> PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE .)
-
-
-state 37
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS . listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-    (9) listaformal -> . tipo IDENTIFICADOR restricformal
-    (11) tipo -> . ENTERO L_CUADRADO R_CUADRADO
-    (12) tipo -> . BOOLEANO
-    (13) tipo -> . ENTERO
-    (14) tipo -> . IDENTIFICADOR
-
-    ENTERO          shift and go to state 18
-    BOOLEANO        shift and go to state 19
-    IDENTIFICADOR   shift and go to state 17
-
-    tipo                           shift and go to state 39
-    listaformal                    shift and go to state 40
-
-state 38
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS . PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 41
-
-
-state 39
-
-    (9) listaformal -> tipo . IDENTIFICADOR restricformal
-
-    IDENTIFICADOR   shift and go to state 42
-
-
-state 40
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal . R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-
-    R_PARENTESIS    shift and go to state 43
-
-
-state 41
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE . L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    L_CUADRADO      shift and go to state 44
-
-
-state 42
-
-    (9) listaformal -> tipo IDENTIFICADOR . restricformal
-    (10) restricformal -> . COMA tipo IDENTIFICADOR
-
-    COMA            shift and go to state 46
-
-    restricformal                  shift and go to state 45
-
-state 43
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS . L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-
-    L_CORCHETE      shift and go to state 47
-
-
-state 44
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO . R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    R_CUADRADO      shift and go to state 48
-
-
-state 45
-
-    (9) listaformal -> tipo IDENTIFICADOR restricformal .
-
-    R_PARENTESIS    reduce using rule 9 (listaformal -> tipo IDENTIFICADOR restricformal .)
-
-
-state 46
-
-    (10) restricformal -> COMA . tipo IDENTIFICADOR
-    (11) tipo -> . ENTERO L_CUADRADO R_CUADRADO
-    (12) tipo -> . BOOLEANO
-    (13) tipo -> . ENTERO
-    (14) tipo -> . IDENTIFICADOR
-
-    ENTERO          shift and go to state 18
-    BOOLEANO        shift and go to state 19
-    IDENTIFICADOR   shift and go to state 17
-
-    tipo                           shift and go to state 49
-
-state 47
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE . declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-    (7) declavar -> . tipo IDENTIFICADOR PUNTO_Y_COMA
-    (11) tipo -> . ENTERO L_CUADRADO R_CUADRADO
-    (12) tipo -> . BOOLEANO
-    (13) tipo -> . ENTERO
-    (14) tipo -> . IDENTIFICADOR
-
-    ENTERO          shift and go to state 18
-    BOOLEANO        shift and go to state 19
-    IDENTIFICADOR   shift and go to state 17
-
-    tipo                           shift and go to state 16
-    declavar                       shift and go to state 50
-
-state 48
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO . IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    IDENTIFICADOR   shift and go to state 51
-
-
-state 49
-
-    (10) restricformal -> COMA tipo . IDENTIFICADOR
-
-    IDENTIFICADOR   shift and go to state 52
-
-
-state 50
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar . declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-    (15) declaracion -> . L_CORCHETE declaracion R_CORCHETE
-    (16) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
-    (18) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
-    (19) declaracion -> . IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
-    (20) declaracion -> . IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
-
-    L_CORCHETE      shift and go to state 55
-    PALABRA_CLAVE   shift and go to state 53
-    IDENTIFICADOR   shift and go to state 54
-
-    declaracion                    shift and go to state 56
-
-state 51
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR . R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
-
-    R_PARENTESIS    shift and go to state 57
-
-
-state 52
-
-    (10) restricformal -> COMA tipo IDENTIFICADOR .
-
-    R_PARENTESIS    reduce using rule 10 (restricformal -> COMA tipo IDENTIFICADOR .)
-
-
-state 53
-
-    (16) declaracion -> PALABRA_CLAVE . L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> PALABRA_CLAVE . L_PARENTESIS expren R_PARENTESIS declaracion
-    (18) declaracion -> PALABRA_CLAVE . L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
-
-    L_PARENTESIS    shift and go to state 58
-
-
-state 54
-
-    (19) declaracion -> IDENTIFICADOR . OPERADOR expren PUNTO_Y_COMA
-    (20) declaracion -> IDENTIFICADOR . L_CUADRADO expren R_CUADRADO OPERADOR expren
-
-    OPERADOR        shift and go to state 59
-    L_CUADRADO      shift and go to state 60
-
-
-state 55
-
-    (15) declaracion -> L_CORCHETE . declaracion R_CORCHETE
-    (15) declaracion -> . L_CORCHETE declaracion R_CORCHETE
-    (16) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
-    (18) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
-    (19) declaracion -> . IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
-    (20) declaracion -> . IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
-
-    L_CORCHETE      shift and go to state 55
-    PALABRA_CLAVE   shift and go to state 53
-    IDENTIFICADOR   shift and go to state 54
-
-    declaracion                    shift and go to state 61
-
-state 56
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion . PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
-
-    PALABRA_CLAVE   shift and go to state 62
-
-
-state 57
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS . L_CORCHETE R_CORCHETE R_CORCHETE
-
-    L_CORCHETE      shift and go to state 63
-
-
-state 58
-
-    (16) declaracion -> PALABRA_CLAVE L_PARENTESIS . expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> PALABRA_CLAVE L_PARENTESIS . expren R_PARENTESIS declaracion
-    (18) declaracion -> PALABRA_CLAVE L_PARENTESIS . expren R_PARENTESIS PUNTO_Y_COMA
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 66
-
-state 59
-
-    (19) declaracion -> IDENTIFICADOR OPERADOR . expren PUNTO_Y_COMA
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 69
-
-state 60
-
-    (20) declaracion -> IDENTIFICADOR L_CUADRADO . expren R_CUADRADO OPERADOR expren
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 70
-
-state 61
-
-    (15) declaracion -> L_CORCHETE declaracion . R_CORCHETE
-
-    R_CORCHETE      shift and go to state 71
-
-
-state 62
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE . expren PUNTO_Y_COMA R_CORCHETE
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 72
-
-state 63
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE . R_CORCHETE R_CORCHETE
-
-    R_CORCHETE      shift and go to state 73
-
-
-state 64
-
-    (23) expren -> PALABRA_CLAVE . exprenprima
-    (24) expren -> PALABRA_CLAVE . PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> PALABRA_CLAVE . IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    PALABRA_CLAVE   shift and go to state 74
-    IDENTIFICADOR   shift and go to state 77
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 75
-
-state 65
-
-    (27) expren -> L_PARENTESIS . expren R_PARENTESIS exprenprima
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 80
-
-state 66
-
-    (16) declaracion -> PALABRA_CLAVE L_PARENTESIS expren . R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> PALABRA_CLAVE L_PARENTESIS expren . R_PARENTESIS declaracion
-    (18) declaracion -> PALABRA_CLAVE L_PARENTESIS expren . R_PARENTESIS PUNTO_Y_COMA
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    R_PARENTESIS    shift and go to state 81
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 67
-
-    (21) expren -> ENTERO . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 83
-
-state 68
-
-    (22) expren -> IDENTIFICADOR . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 84
-
-state 69
-
-    (19) declaracion -> IDENTIFICADOR OPERADOR expren . PUNTO_Y_COMA
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    PUNTO_Y_COMA    shift and go to state 85
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 70
-
-    (20) declaracion -> IDENTIFICADOR L_CUADRADO expren . R_CUADRADO OPERADOR expren
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    R_CUADRADO      shift and go to state 86
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 71
-
-    (15) declaracion -> L_CORCHETE declaracion R_CORCHETE .
-
-    PALABRA_CLAVE   reduce using rule 15 (declaracion -> L_CORCHETE declaracion R_CORCHETE .)
-    R_CORCHETE      reduce using rule 15 (declaracion -> L_CORCHETE declaracion R_CORCHETE .)
-
-
-state 72
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren . PUNTO_Y_COMA R_CORCHETE
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    PUNTO_Y_COMA    shift and go to state 87
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 73
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE . R_CORCHETE
-
-    R_CORCHETE      shift and go to state 88
-
-
-state 74
-
-    (24) expren -> PALABRA_CLAVE PALABRA_CLAVE . L_CUADRADO expren R_CUADRADO exprenprima
-
-    L_CUADRADO      shift and go to state 89
-
-
-state 75
-
-    (23) expren -> PALABRA_CLAVE exprenprima .
-
-    R_PARENTESIS    reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-    OPERADOR        reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-    L_CUADRADO      reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-    PUNTO           reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-    PUNTO_Y_COMA    reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-    R_CUADRADO      reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-    PALABRA_CLAVE   reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-    R_CORCHETE      reduce using rule 23 (expren -> PALABRA_CLAVE exprenprima .)
-
-
-state 76
-
-    (29) exprenprima -> L_CUADRADO . expren R_CUADRADO
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 90
-
-state 77
-
-    (25) expren -> PALABRA_CLAVE IDENTIFICADOR . L_PARENTESIS R_PARENTESIS exprenprima
-
-    L_PARENTESIS    shift and go to state 91
-
-
-state 78
-
-    (28) exprenprima -> OPERADOR . expren
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 92
-
-state 79
-
-    (30) exprenprima -> PUNTO . PALABRA_CLAVE
-    (31) exprenprima -> PUNTO . IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    PALABRA_CLAVE   shift and go to state 93
-    IDENTIFICADOR   shift and go to state 94
-
-
-state 80
-
-    (27) expren -> L_PARENTESIS expren . R_PARENTESIS exprenprima
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    R_PARENTESIS    shift and go to state 95
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 81
-
-    (16) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS . declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS . declaracion
-    (18) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS . PUNTO_Y_COMA
-    (15) declaracion -> . L_CORCHETE declaracion R_CORCHETE
-    (16) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
-    (18) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
-    (19) declaracion -> . IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
-    (20) declaracion -> . IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
-
-    PUNTO_Y_COMA    shift and go to state 97
-    L_CORCHETE      shift and go to state 55
-    PALABRA_CLAVE   shift and go to state 53
-    IDENTIFICADOR   shift and go to state 54
-
-    declaracion                    shift and go to state 96
-
-state 82
-
-    (26) expren -> expren exprenprima .
-
-    R_PARENTESIS    reduce using rule 26 (expren -> expren exprenprima .)
-    OPERADOR        reduce using rule 26 (expren -> expren exprenprima .)
-    L_CUADRADO      reduce using rule 26 (expren -> expren exprenprima .)
-    PUNTO           reduce using rule 26 (expren -> expren exprenprima .)
-    PUNTO_Y_COMA    reduce using rule 26 (expren -> expren exprenprima .)
-    R_CUADRADO      reduce using rule 26 (expren -> expren exprenprima .)
-    PALABRA_CLAVE   reduce using rule 26 (expren -> expren exprenprima .)
-    R_CORCHETE      reduce using rule 26 (expren -> expren exprenprima .)
-
-
-state 83
-
-    (21) expren -> ENTERO exprenprima .
-
-    R_PARENTESIS    reduce using rule 21 (expren -> ENTERO exprenprima .)
-    OPERADOR        reduce using rule 21 (expren -> ENTERO exprenprima .)
-    L_CUADRADO      reduce using rule 21 (expren -> ENTERO exprenprima .)
-    PUNTO           reduce using rule 21 (expren -> ENTERO exprenprima .)
-    PUNTO_Y_COMA    reduce using rule 21 (expren -> ENTERO exprenprima .)
-    R_CUADRADO      reduce using rule 21 (expren -> ENTERO exprenprima .)
-    PALABRA_CLAVE   reduce using rule 21 (expren -> ENTERO exprenprima .)
-    R_CORCHETE      reduce using rule 21 (expren -> ENTERO exprenprima .)
-
-
-state 84
-
-    (22) expren -> IDENTIFICADOR exprenprima .
-
-    R_PARENTESIS    reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-    OPERADOR        reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-    L_CUADRADO      reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-    PUNTO           reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-    PUNTO_Y_COMA    reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-    R_CUADRADO      reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-    PALABRA_CLAVE   reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-    R_CORCHETE      reduce using rule 22 (expren -> IDENTIFICADOR exprenprima .)
-
-
-state 85
-
-    (19) declaracion -> IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA .
-
-    PALABRA_CLAVE   reduce using rule 19 (declaracion -> IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA .)
-    R_CORCHETE      reduce using rule 19 (declaracion -> IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA .)
-
-
-state 86
-
-    (20) declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO . OPERADOR expren
-
-    OPERADOR        shift and go to state 98
-
-
-state 87
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA . R_CORCHETE
-
-    R_CORCHETE      shift and go to state 99
-
-
-state 88
-
-    (3) claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE .
-
-    PALABRA_CLAVE   reduce using rule 3 (claseprincipal -> PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE .)
-
-
-state 89
-
-    (24) expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO . expren R_CUADRADO exprenprima
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 100
-
-state 90
-
-    (29) exprenprima -> L_CUADRADO expren . R_CUADRADO
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    R_CUADRADO      shift and go to state 101
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 91
-
-    (25) expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS . R_PARENTESIS exprenprima
-
-    R_PARENTESIS    shift and go to state 102
-
-
-state 92
-
-    (28) exprenprima -> OPERADOR expren .
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-  ! shift/reduce conflict for OPERADOR resolved as shift
-  ! shift/reduce conflict for L_CUADRADO resolved as shift
-  ! shift/reduce conflict for PUNTO resolved as shift
-    R_PARENTESIS    reduce using rule 28 (exprenprima -> OPERADOR expren .)
-    PUNTO_Y_COMA    reduce using rule 28 (exprenprima -> OPERADOR expren .)
-    R_CUADRADO      reduce using rule 28 (exprenprima -> OPERADOR expren .)
-    PALABRA_CLAVE   reduce using rule 28 (exprenprima -> OPERADOR expren .)
-    R_CORCHETE      reduce using rule 28 (exprenprima -> OPERADOR expren .)
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-  ! OPERADOR        [ reduce using rule 28 (exprenprima -> OPERADOR expren .) ]
-  ! L_CUADRADO      [ reduce using rule 28 (exprenprima -> OPERADOR expren .) ]
-  ! PUNTO           [ reduce using rule 28 (exprenprima -> OPERADOR expren .) ]
-
-    exprenprima                    shift and go to state 82
-
-state 93
-
-    (30) exprenprima -> PUNTO PALABRA_CLAVE .
-
-    R_PARENTESIS    reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-    OPERADOR        reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-    L_CUADRADO      reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-    PUNTO           reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-    PUNTO_Y_COMA    reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-    R_CUADRADO      reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-    PALABRA_CLAVE   reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-    R_CORCHETE      reduce using rule 30 (exprenprima -> PUNTO PALABRA_CLAVE .)
-
-
-state 94
-
-    (31) exprenprima -> PUNTO IDENTIFICADOR . L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    L_PARENTESIS    shift and go to state 103
-
-
-state 95
-
-    (27) expren -> L_PARENTESIS expren R_PARENTESIS . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 104
-
-state 96
-
-    (16) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion . PALABRA_CLAVE declaracion
-    (17) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion .
-
-  ! shift/reduce conflict for PALABRA_CLAVE resolved as shift
-    PALABRA_CLAVE   shift and go to state 105
-    R_CORCHETE      reduce using rule 17 (declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion .)
-
-  ! PALABRA_CLAVE   [ reduce using rule 17 (declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion .) ]
-
-
-state 97
-
-    (18) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA .
-
-    PALABRA_CLAVE   reduce using rule 18 (declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA .)
-    R_CORCHETE      reduce using rule 18 (declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA .)
-
-
-state 98
-
-    (20) declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR . expren
-    (21) expren -> . ENTERO exprenprima
-    (22) expren -> . IDENTIFICADOR exprenprima
-    (23) expren -> . PALABRA_CLAVE exprenprima
-    (24) expren -> . PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-    (25) expren -> . PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-    (26) expren -> . expren exprenprima
-    (27) expren -> . L_PARENTESIS expren R_PARENTESIS exprenprima
-
-    ENTERO          shift and go to state 67
-    IDENTIFICADOR   shift and go to state 68
-    PALABRA_CLAVE   shift and go to state 64
-    L_PARENTESIS    shift and go to state 65
-
-    expren                         shift and go to state 106
-
-state 99
-
-    (8) declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE .
-
-    R_CORCHETE      reduce using rule 8 (declmetodo -> PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE .)
-
-
-state 100
-
-    (24) expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren . R_CUADRADO exprenprima
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    R_CUADRADO      shift and go to state 107
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 101
-
-    (29) exprenprima -> L_CUADRADO expren R_CUADRADO .
-
-    R_PARENTESIS    reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-    OPERADOR        reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-    L_CUADRADO      reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-    PUNTO           reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-    PUNTO_Y_COMA    reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-    R_CUADRADO      reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-    PALABRA_CLAVE   reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-    R_CORCHETE      reduce using rule 29 (exprenprima -> L_CUADRADO expren R_CUADRADO .)
-
-
-state 102
-
-    (25) expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 108
-
-state 103
-
-    (31) exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS . IDENTIFICADOR R_PARENTESIS
-
-    IDENTIFICADOR   shift and go to state 109
-
-
-state 104
-
-    (27) expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .
-
-    R_PARENTESIS    reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-    OPERADOR        reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-    L_CUADRADO      reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-    PUNTO           reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-    PUNTO_Y_COMA    reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-    R_CUADRADO      reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-    PALABRA_CLAVE   reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-    R_CORCHETE      reduce using rule 27 (expren -> L_PARENTESIS expren R_PARENTESIS exprenprima .)
-
-
-state 105
-
-    (16) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE . declaracion
-    (15) declaracion -> . L_CORCHETE declaracion R_CORCHETE
-    (16) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-    (17) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
-    (18) declaracion -> . PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
-    (19) declaracion -> . IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
-    (20) declaracion -> . IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
-
-    L_CORCHETE      shift and go to state 55
-    PALABRA_CLAVE   shift and go to state 53
-    IDENTIFICADOR   shift and go to state 54
-
-    declaracion                    shift and go to state 110
-
-state 106
-
-    (20) declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren .
-    (26) expren -> expren . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    PALABRA_CLAVE   reduce using rule 20 (declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren .)
-    R_CORCHETE      reduce using rule 20 (declaracion -> IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren .)
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 82
-
-state 107
-
-    (24) expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO . exprenprima
-    (28) exprenprima -> . OPERADOR expren
-    (29) exprenprima -> . L_CUADRADO expren R_CUADRADO
-    (30) exprenprima -> . PUNTO PALABRA_CLAVE
-    (31) exprenprima -> . PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
-
-    OPERADOR        shift and go to state 78
-    L_CUADRADO      shift and go to state 76
-    PUNTO           shift and go to state 79
-
-    exprenprima                    shift and go to state 111
-
-state 108
-
-    (25) expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .
-
-    R_PARENTESIS    reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-    OPERADOR        reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-    L_CUADRADO      reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-    PUNTO           reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-    PUNTO_Y_COMA    reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-    R_CUADRADO      reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-    PALABRA_CLAVE   reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-    R_CORCHETE      reduce using rule 25 (expren -> PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima .)
-
-
-state 109
-
-    (31) exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR . R_PARENTESIS
-
-    R_PARENTESIS    shift and go to state 112
-
-
-state 110
-
-    (16) declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion .
-
-    PALABRA_CLAVE   reduce using rule 16 (declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion .)
-    R_CORCHETE      reduce using rule 16 (declaracion -> PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion .)
-
-
-state 111
-
-    (24) expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .
-
-    R_PARENTESIS    reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-    OPERADOR        reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-    L_CUADRADO      reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-    PUNTO           reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-    PUNTO_Y_COMA    reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-    R_CUADRADO      reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-    PALABRA_CLAVE   reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-    R_CORCHETE      reduce using rule 24 (expren -> PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima .)
-
-
-state 112
-
-    (31) exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .
-
-    R_PARENTESIS    reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-    OPERADOR        reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-    L_CUADRADO      reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-    PUNTO           reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-    PUNTO_Y_COMA    reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-    R_CUADRADO      reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-    PALABRA_CLAVE   reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-    R_CORCHETE      reduce using rule 31 (exprenprima -> PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS .)
-
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for OPERADOR in state 92 resolved as shift
-WARNING: shift/reduce conflict for L_CUADRADO in state 92 resolved as shift
-WARNING: shift/reduce conflict for PUNTO in state 92 resolved as shift
-WARNING: shift/reduce conflict for PALABRA_CLAVE in state 96 resolved as shift

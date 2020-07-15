@@ -1,6 +1,4 @@
 import os
-import re  # Importa la biblioteca que maneja regex de Python
-
 import ply.lex as lex
 import ply.yacc as yacc
 import sys
@@ -35,6 +33,10 @@ def t_PALABRA_CLAVE(t):
     t.type = "PALABRA_CLAVE"
     return t
 
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
 def t_BOOLEANO(t):
     r'verdad|falso'
     t.type = 'BOOLEANO'
@@ -44,6 +46,7 @@ def t_ENTERO(t):
     r'[0-9]+'
     t.type = 'ENTERO'
     return t
+
 
 def t_IDENTIFICADOR(t):
     r'[A-Za-z0-9_]+'
@@ -118,106 +121,212 @@ t_ignore = ' \t'
 
 lexer = lex.lex()
 
-def p_inicial(p):
-   '''
-   inicial : programa
-   '''
-   print(p[1])
+def p_restricformal(p):
+    '''
+    restricformal : COMA tipo IDENTIFICADOR
+    '''
+    print("restricformal")
+    p[0] = p[1],p[2],p[3]
 
 def p_programa(p):
    '''
    programa : claseprincipal declclase
    '''
-   p[0] = (p[1] , p[2])
-
+   print("programa")
 def p_claseprincipal(p):
    '''
    claseprincipal : PALABRA_CLAVE PALABRA_CLAVE IDENTIFICADOR L_CORCHETE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE PALABRA_CLAVE L_PARENTESIS PALABRA_CLAVE L_CUADRADO R_CUADRADO IDENTIFICADOR R_PARENTESIS L_CORCHETE R_CORCHETE R_CORCHETE
    '''
-   p[0] = p[1]
-
+   print("claseprincipal")
 def p_declclase(p):
     '''
     declclase : PALABRA_CLAVE IDENTIFICADOR declclaseprima
     '''
-    p[0] = (p[1] ,p[2], p[3])
+    print("declclase")
 
-def p_declclaseprima(p):
+def p_declclaseprima1(p):
     '''
     declclaseprima : L_CORCHETE declavar declmetodo R_CORCHETE
-                   | PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE
+
     '''
-    p[0] = p[1]
+    print("declclaseprima")
+
+def p_declclaseprima2(p):
+    '''
+    declclaseprima : PALABRA_CLAVE IDENTIFICADOR L_CORCHETE declavar declmetodo R_CORCHETE
+    '''
+    print("declclaseprima")
 
 def p_declavar(p):
     '''
     declavar : tipo IDENTIFICADOR PUNTO_Y_COMA
     '''
-    p[0] = (p[1], p[2], p[3])
-
+    print("declavar")
 def p_declmetodo(p):
     '''
     declmetodo : PALABRA_CLAVE tipo IDENTIFICADOR L_PARENTESIS listaformal R_PARENTESIS L_CORCHETE declavar declaracion PALABRA_CLAVE expren PUNTO_Y_COMA R_CORCHETE
     '''
-    p[0] = ( p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9], p[10], p[11], p[12], p[3])
-
+    print("declmetodo")
 def p_listaformal(p):
     '''
     listaformal : tipo IDENTIFICADOR restricformal
     '''
-    p[0] = p[1] , p[2] , p[3]
+    print("listaformal")
 
-def p_restricformal(p):
-    '''
-    restricformal : COMA tipo IDENTIFICADOR
-    '''
-    p[0] = p[1], p[2], p[3]
-
-def p_tipo(p):
+def p_tipo1(p):
     '''
     tipo : ENTERO L_CUADRADO R_CUADRADO
-        | BOOLEANO
-        | ENTERO
-        | IDENTIFICADOR
     '''
-    p[0] = p[1]
+    print("tipo")
 
-def p_declaracion(p):
+def p_tipo2(p):
+    '''
+    tipo :  BOOLEANO
+    '''
+    print("tipo")
+
+def p_tipo3(p):
+    '''
+    tipo : ENTERO
+    '''
+    print("tipo")
+
+def p_tipo4(p):
+    '''
+    tipo : IDENTIFICADOR
+    '''
+    print("tipo")
+
+def p_declaracion1(p):
     '''
     declaracion : L_CORCHETE declaracion R_CORCHETE
-                | PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
-                | PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
-                | PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
-                | IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
-                | IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
     '''
-    p[0] = p[1]
+    print("declaracion")
 
-def p_expren(p):
+def p_declaracion2(p):
+    '''
+    declaracion : PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion PALABRA_CLAVE declaracion
+    '''
+    print("declaracion")
+
+def p_declaracion3(p):
+    '''
+    declaracion : PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS declaracion
+    '''
+    print("declaracion")
+
+def p_declaracion4(p):
+    '''
+    declaracion : PALABRA_CLAVE L_PARENTESIS expren R_PARENTESIS PUNTO_Y_COMA
+    '''
+    print("declaracion")
+
+def p_declaracion5(p):
+    '''
+    declaracion : IDENTIFICADOR OPERADOR expren PUNTO_Y_COMA
+    '''
+    print("declaracion")
+
+
+def p_declaracion6(p):
+    '''
+    declaracion : IDENTIFICADOR L_CUADRADO expren R_CUADRADO OPERADOR expren
+    '''
+    print("declaracion")
+
+def p_declaracion7(p):
+    '''
+    declaracion :
+    '''
+    print("declaracion")
+
+def p_expren1(p):
     '''
     expren : ENTERO exprenprima
-            | IDENTIFICADOR exprenprima
-            | PALABRA_CLAVE exprenprima
-            | PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
-            | PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
-            | expren exprenprima
-            | L_PARENTESIS expren R_PARENTESIS exprenprima
     '''
-    p[0] = p[1] , p[2]
+    print("expren")
 
-def p_exprenprima(p):
+def p_expren2(p):
+    '''
+    expren : IDENTIFICADOR exprenprima
+    '''
+    print("expren")
+
+def p_expren3(p):
+    '''
+    expren : PALABRA_CLAVE exprenprima
+    '''
+    print("expren")
+
+def p_expren4(p):
+    '''
+    expren : PALABRA_CLAVE PALABRA_CLAVE L_CUADRADO expren R_CUADRADO exprenprima
+    '''
+    print("expren")
+
+def p_expren5(p):
+    '''
+    expren : PALABRA_CLAVE IDENTIFICADOR L_PARENTESIS R_PARENTESIS exprenprima
+    '''
+    print("expren")
+
+def p_expren6(p):
+    '''
+    expren : expren exprenprima
+    '''
+    print("expren")
+
+def p_expren7(p):
+    '''
+    expren : L_PARENTESIS expren R_PARENTESIS exprenprima
+    '''
+    print("expren")
+
+def p_expren8(p):
+    '''
+    expren :
+    '''
+    print("expren")
+
+def p_exprenprima1(p):
     '''
     exprenprima :  OPERADOR expren
-                | L_CUADRADO expren R_CUADRADO
-                | PUNTO PALABRA_CLAVE
-                | PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
     '''
-    p[0] = p[1], p[2]
+    print("exprenprima")
+
+def p_exprenprima2(p):
+    '''
+    exprenprima :  L_CUADRADO expren R_CUADRADO
+    '''
+    print("exprenprima")
+
+def p_exprenprima3(p):
+    '''
+    exprenprima : PUNTO PALABRA_CLAVE
+    '''
+    print("exprenprima")
+
+def p_exprenprima4(p):
+    '''
+    exprenprima : PUNTO IDENTIFICADOR L_PARENTESIS IDENTIFICADOR R_PARENTESIS
+    '''
+    print("exprenprima")
+
+def p_exprenprima5(p):
+    '''
+    exprenprima :
+    '''
+    print("exprenprima")
+
+def p_empty(p):
+    '''
+    empty :
+    '''
+    pass
 
 def p_error(p):
-    print(p)
-    print("Error sintactico")
-
+    print("Error sintactico", p)
+    print("Error en la línea: " + str(p.lineno))
 
 path = os.getcwd().split("\\")
 new_path = ""
@@ -228,13 +337,8 @@ archivo = open(new_path + sys.argv[1],'r')
 programa = archivo.read()
 
 parser = yacc.yacc()
-
-while True:
-    try:
-        for i in programa:
-            s = i
-            parser.parse(i)
-    except EOFError:
-        break
-    input()
-
+print(parser.parse(", entero akjsbd"))
+print(parser.parse(", booleano variable1"))
+print(parser.parse(", hilera variable2"))
+print(parser.parse(", identificadorDePrueba variable3"))
+resultado1 = parser.parse(programa)
