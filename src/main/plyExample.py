@@ -111,9 +111,10 @@ def t_PUNTO_Y_COMA(t):
     return t
 
 def t_error(t):
-    print("Error en el léxico")
-    print(t)
+    print("Error en el léxico '%s' " % t.value[0])
     t.lexer.skip(1)
+
+t_ignore = ' \t'
 
 lexer = lex.lex()
 
@@ -217,12 +218,23 @@ def p_error(p):
     print(p)
     print("Error sintactico")
 
+
+path = os.getcwd().split("\\")
+new_path = ""
+for i in range(len(path)-1):
+    new_path += path[i] + '/'
+new_path += "resources/"
+archivo = open(new_path + sys.argv[1],'r')
+programa = archivo.read()
+
 parser = yacc.yacc()
 
 while True:
     try:
-        s = input('').split(" ")
+        for i in programa:
+            s = i
+            parser.parse(i)
     except EOFError:
         break
-    for i in s:
-        parser.parse(i)
+    input()
+

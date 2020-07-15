@@ -35,6 +35,10 @@ def t_PALABRA_CLAVE(t):
     t.type = "PALABRA_CLAVE"
     return t
 
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
 def t_BOOLEANO(t):
     r'verdad|falso'
     t.type = 'BOOLEANO'
@@ -44,6 +48,7 @@ def t_ENTERO(t):
     r'[0-9]+'
     t.type = 'ENTERO'
     return t
+
 
 def t_IDENTIFICADOR(t):
     r'[A-Za-z0-9_]+'
@@ -111,12 +116,26 @@ def t_PUNTO_Y_COMA(t):
     return t
 
 def t_error(t):
-    print("Error en el léxico")
-    print(t)
+    print("Error en el léxico '%s' " % t.value[0])
     t.lexer.skip(1)
 
+# Obtiene el path actual donde se encuentra el Main.py, este directorio lo separa y lo mete en una lista
+path = os.getcwd().split("\\")
+# Este va ser el nuevo path para buscar las pruebas
+new_path = ""
+# Insertar todos los paths menos el último, exceptuando la carpeta main
+for i in range(len(path)-1):
+    new_path += path[i] + '/'
+# Concatena la carpeta resources al path nuevo, esto para que apunte a una nueva carpeta
+new_path += "resources/"
+# Editar la ruta según computadora que se ejecuta
+archivo = open(new_path + sys.argv[1],'r')
+programa = archivo.read()
+
+t_ignore = ' \t'
+
 lexer = lex.lex()
-lexer.input("")
+lexer.input(programa)
 while(True):
     tok = lexer.token()
     if not tok:
